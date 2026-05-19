@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>My Portfolio</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    background: #f5f5f5;
+    overflow-x: hidden;
+	font-family: 'Inter', sans-serif;
+}
+
+
+/* HERO */
+.hero {
+    background: #222;
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+/* CASE STUDIES */
+.case-img {
+    height: 160px;
+    object-fit: cover;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+/* =========================
+   SECTION TITLE BAR (NEW)
+========================= */
+
+.section-bar {
+    background: #f1f3f5;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 24px;
+    font-weight: 600;
+
+    color: #333;
+}
+
+/* =========================
+   PROFILE CARD STYLE
+========================= */
+
+.about-card {
+    padding: 0;
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* TOP SECTION */
+.profile-top {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 16px;
+}
+
+/* IMAGE */
+.profile-img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eaeaea;
+}
+
+/* NAME + TITLE */
+.profile-info h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.profile-info span {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* INTRO TEXT */
+.profile-text {
+    padding: 0 16px 16px 16px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* =========================
+   SOCIAL ICONS (BOTTOM LEFT)
+========================= */
+
+.social-bar {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.social-bar a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    font-size: 1.2rem;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.10);
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+/* LINKEDIN */
+.social-bar a.linkedin {
+    color: #0A66C2;
+}
+
+/* INSTAGRAM */
+.social-bar a.instagram {
+    color: #E4405F;
+}
+
+/* INSTAGRAM COLOR */
+.social-bar a.instagram:hover {
+    background: #e4405f;
+}
+
+.social-bar a:hover {
+    transform: translateY(-3px) scale(1.08);
+    background: #0d6efd;
+    color: white;
+}
+
+
+/* =========================
+   POPUP STYLE
+========================= */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.popup-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.popup-box h5 {
+    margin-bottom: 10px;
+}
+
+.popup-box p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Mike Lin</h1>
+    <p>UI Design Student Portfolio</p>
+</div>
+
+<div class="container mt-4">
+
+    <div class="row g-3">
+
+        <!-- ABOUT -->
+        <div class="col-md-6">
+            <div class="card about-card h-100">
+
+                <!-- SECTION BAR -->
+                <div class="section-bar">About Me</div>
+
+                <!-- TOP -->
+                <div class="profile-top">
+                    <img class="profile-img" src="./MikeLin.jpg">
+
+                    <div class="profile-info">
+                        <h4>Mike Lin</h4>
+                        <span>Computer Science</span>
+                    </div>
+                </div>
+				
+				
+
+                <!-- INTRO -->
+                <div class="profile-text">
+                    Hi, I'm Mike Lin. I am a third-year Computer Science student in Ottawa with a strong interest in UI/UX design and front-end development. I enjoy creating clean, modern, and user-friendly interfaces that improve digital experiences.
+				           <!-- CONTACT BUTTON -->
+							<div class="mt-3">
+							   <button class="btn btn-primary btn-sm" onclick="openPopup()">
+								Contact Me
+							   </button>
+							</div>
+                </div>
+
+                <!-- SOCIAL ICONS -->
+                <div class="social-bar">
+                    <a href="https://www.linkedin.com/in/mike-lin-36a91233a/" target="_blank">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+
+                    <a class="instagram" href="https://www.instagram.com/mikelin841?igsh=bzloZW9sZDd4eHA1" target="_blank">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- HOW I WORK -->
+        <div class="col-md-6">
+            <div class="card h-100">
+
+                <!-- SECTION BAR -->
+                <div class="section-bar">How I Work</div>
+
+                <div class="p-3">
+
+                    <p>I am currently studying UI Design and learning:</p>
+					<ul>
+					    <li>Visiual Communication</li>
+                        <li>User-centered design</li>
+                        <li>Human Cognition</li>
+                    </ul>
+
+                    <p>
+                        I focus on combining design and technology to build intuitive and accessible products.
+                    </p>
+
+                    <p><b>My process:</b></p>
+                    <p>Research → Design → Prototype → Test</p>
+
+                    <a href="https://www.nngroup.com/" target="_blank">NN/g UX Resources</a>
+                    <br>
+                    <a href="https://medium.com" target="_blank">Medium</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CASE STUDIES -->
+    <h3 class="section-bar text-center mt-5">Case Studies</h3>
+    <div class="row g-3 mt-2">
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+                <img class="case-img card-img-top" src="./servicewebsite.jpg">
+                <div class="card-body">
+                    <h6>Service Website</h6>
+                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+                <img class="case-img card-img-top" src="./memorygame.jpg">
+                <div class="card-body">
+                    <h6>Memory Game</h6>
+                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+                <img class="case-img card-img-top" src="./ecommerce.jpg">
+                <div class="card-body">
+                    <h6>E-commerce Site</h6>
+                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+                <img class="case-img card-img-top" src="./analytic.jpg">
+                <div class="card-body">
+                    <h6>Analytics Dashboard</h6>
+                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- EMAIL POPUP -->
+<div id="emailPopup" class="popup-overlay">
+    <div class="popup-box">
+        <h5>Contact Email</h5>
+        <p id="emailText">zlin124@uottawa.ca</p>
+
+        <button class="btn btn-outline-primary btn-sm" onclick="copyEmail()">
+            Copy Email
+        </button>
+
+        <button class="btn btn-secondary btn-sm" onclick="closePopup()">
+            Close
+        </button>
+    </div>
+</div>
+
+<script>
+function openPopup() {
+    document.getElementById("emailPopup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("emailPopup").style.display = "none";
+}
+
+function copyEmail() {
+    const email = document.getElementById("emailText").innerText;
+
+    navigator.clipboard.writeText(email).then(() => {
+        alert("Email copied: " + email);
+    });
+}
+</script>
+</body>
+</html>
