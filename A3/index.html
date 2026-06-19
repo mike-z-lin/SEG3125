@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <!-- START SCREEN -->
+    <section id="startScreen" class="panel">
+      <h1>Memory Challenge</h1>
+      <p class="subtitle">Find pairs of images under the following cards</p>
+
+      <div class="stats">
+        <span>⏱ Timer: <strong>00:00</strong></span>
+        <span>↔ Moves: <strong>0</strong></span>
+        <span>⧉ Pairs found: <strong>0</strong></span>
+      </div>
+
+      <!-- Empty playboard is shown at the beginning -->
+      <div id="previewBoard" class="board preview-board"></div>
+
+      <div class="setup-row">
+        <span class="setup-label">Level</span>
+        <button class="level-btn" data-level="3x2">3×2</button>
+        <button class="level-btn" data-level="4x3">4×3</button>
+        <button class="level-btn active" data-level="4x4">4×4</button>
+        <button class="level-btn" data-level="5x4">5×4</button>
+        <button class="level-btn" data-level="6x5">6×5</button>
+      </div>
+
+      <div class="setup-row theme-row">
+        <span class="setup-label">Type</span>
+        <button class="theme-btn active" data-theme="animals"><span>🐾</span>Animals</button>
+        <button class="theme-btn" data-theme="food"><span>🍲</span>Food</button>
+        <button class="theme-btn" data-theme="tree"><span>🌳</span>Tree</button>
+        <button class="theme-btn" data-theme="mixed"><span>⭐</span>Mixed</button>
+      </div>
+
+      <button id="startBtn" class="primary-btn">Start Game</button>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <section id="gameScreen" class="panel hidden">
+      <h1>Memory Challenge</h1>
+      <p class="subtitle">Find pairs of images under the following tiles</p>
+
+      <div class="stats">
+        <span>⏱ Timer: <strong id="timerText">00:00</strong></span>
+        <span>↔ Moves: <strong id="movesText">0</strong></span>
+        <span>⧉ Pairs found: <strong id="pairsText">0</strong></span>
+      </div>
+
+      <div id="board" class="board"></div>
+
+      <div id="feedback" class="feedback"></div>
+
+      <div class="controls">
+        <button id="playAgainBtn" class="secondary-btn">Play Again</button>
+        <button id="changeLevelBtn" class="secondary-btn">Change Level</button>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="resultScreen" class="panel result hidden">
+      <h1>Memory Challenge</h1>
+      <div class="trophy">🏆</div>
+      <p class="congrats">Congratulations!</p>
+      <p class="white-box">you matched all pairs!</p>
+
+      <div class="summary">
+        <div><b>Moves</b><strong id="resultMoves">0</strong></div>
+        <div><b>Time</b><strong id="resultTime">00:00</strong></div>
+        <div><b>Accuracy</b><strong id="resultAccuracy">0%</strong></div>
+      </div>
+
+      <p class="white-box">Your ranking for board size <strong id="resultLevel">4×4</strong></p>
+
+      <table>
+        <thead><tr><th>Rank</th><th>Round</th><th>Moves</th><th>Time</th></tr></thead>
+        <tbody id="rankingBody"></tbody>
+      </table>
+
+      <div class="controls">
+        <button id="resultPlayAgainBtn" class="primary-btn">Play Again</button>
+        <button id="resultChangeLevelBtn" class="primary-btn">Change Level</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
