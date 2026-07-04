@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildTrail | Canada Day Sale</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #111;
+            background: white;
+        }
+
+        .promo-bar {
+            background: #f4f1ed;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .promo-bar a {
+            color: #111;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .promo-bar span {
+            position: absolute;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            color: #111;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #c82333;
+        }
+
+        .search-box {
+            width: 220px;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -9px;
+            right: -11px;
+            background: #d10f2f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            min-height: 620px;
+            background:
+                linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.2)),
+                url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 520px;
+            margin-left: 7%;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.05;
+        }
+
+        .sale-text {
+            color: #d62828;
+        }
+
+        .promo-box {
+            background: rgba(255,255,255,0.85);
+            padding: 18px 22px;
+            border-radius: 6px;
+            max-width: 380px;
+            margin: 25px 0;
+        }
+
+        .btn {
+            border-radius: 2px;
+            padding: 13px 32px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .category-card img {
+            height: 150px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 3px;
+            background: #eee;
+        }
+
+        .category-card p {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .info-strip {
+            border-top: 1px solid #eee;
+            margin-top: 35px;
+            padding: 25px 0;
+        }
+
+        .info-item {
+            border-right: 1px solid #ddd;
+        }
+
+        .info-item:last-child {
+            border-right: none;
+        }
+
+        .icon {
+            font-size: 28px;
+        }
+
+        .product-card {
+            cursor: pointer;
+        }
+
+     /* .product-card img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            background: #f2f2f2;
+        }
+	 */
+		
+	  .product-card img {
+		width: 100%;
+		height: 360px;
+		object-fit: contain;
+		object-position: center top;
+		background: #f2f2f2;
+		}
+		
+		
+
+        .product-card h6 {
+            font-size: 15px;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .product-card p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .color-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            border: 1px solid #999;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            vertical-align: middle;
+        }
+
+        .color-dot:hover,
+        .color-dot.active {
+            transform: scale(1.2);
+            border: 2px solid #111;
+        }
+
+       /* .detail-image {
+            width: 100%;
+            height: 760px;
+            object-fit: cover;
+            background: #f2f2f2;
+        } */
+		
+		.detail-image {
+		width: 100%;
+		height: 760px;
+		object-fit: contain;
+		object-position: center top;
+		background: #f2f2f2;
+		}
+
+        .size-btn {
+            width: 74px;
+            height: 48px;
+            border: 1px solid #ccc;
+            background: white;
+            margin: 0 8px 10px 0;
+            font-weight: 600;
+        }
+
+        .size-btn.active {
+            border: 2px solid #111;
+            background: #f8f8f8;
+        }
+
+        .ship-box {
+            border: 1px solid #ddd;
+            padding: 18px;
+            margin-top: 24px;
+        }
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100vh;
+            background: white;
+            box-shadow: -4px 0 18px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .footer-intro {
+            background: #f4f3f1;
+            padding: 55px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-intro h1 {
+            font-size: 52px;
+            font-weight: 400;
+        }
+
+        .footer {
+            background: #111;
+            color: white;
+            padding: 35px;
+        }
+
+        .footer h6 {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            margin-top: 120px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-content {
+                margin: 30px;
+            }
+
+            .detail-image {
+                height: 450px;
+            }
+
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .footer-intro {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .footer-intro h1 {
+                font-size: 38px;
+            }
+
+            .info-item {
+                border-right: none;
+                margin-bottom: 20px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Promo Bar -->
+    <div class="promo-bar" id="promoBar">
+        Canada Day Sale is here. Save 25% today!
+        <a href="#">Shop Canada Day Sale</a>
+        <span onclick="closePromo()">×</span>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom px-4">
+        <a class="navbar-brand" href="#" onclick="showHome()">🌲 WildTrail</a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav mx-auto gap-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Women</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Men
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Coats & Jackets</a></li>
+                        <li><a class="dropdown-item" href="#">Tops</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showShirtsPage()">Shirts</a></li>
+                        <li><a class="dropdown-item" href="#">Shorts</a></li>
+                        <li><a class="dropdown-item" href="#">Pants</a></li>
+                        <li><a class="dropdown-item" href="#">Accessories</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Shop All Men</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accessories</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">What’s New</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold" href="#">Canada Day Sale</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-3">
+                <input class="form-control rounded-pill search-box" type="search" placeholder="Search">
+                <span>🌐 CA</span>
+                <span>👤</span>
+                <span class="cart-icon" onclick="toggleCart()">
+                    🛍️
+                    <span class="cart-count" id="cartCount">0</span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <p class="fw-bold text-uppercase">Limited time only</p>
+
+            <h1>
+                CANADA DAY <br>
+                <span class="sale-text">SALE 🍁</span>
+            </h1>
+
+            <p class="fs-5 mt-4">
+                Celebrate in style.<br>
+                Relax and outdoor essentials, now at their best prices.
+            </p>
+
+            <div class="promo-box">
+                <h4 class="fw-bold">🔥 Save 25% today!</h4>
+                <p class="mb-0 fs-5">Buy now before the sale ends.</p>
+            </div>
+
+            <button class="btn btn-dark me-3" onclick="showShirtsPage()">SHOP SALE</button>
+            <button class="btn btn-outline-dark">SHOP NEW ARRIVALS</button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="container-fluid px-5 py-4" id="categorySection">
+        <h3 class="text-center fw-bold mb-4">Shop by category</h3>
+
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3 col-lg category-card">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80" alt="Women category">
+                <p>Women</p>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg category-card" onclick="showShirtsPage()">
+                <img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=500&q=80" alt="Men category">
+                <p>Men</p>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg category-card">
+                <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=500&q=80" alt="Outerwear category">
+                <p>Outerwear</p>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg category-card" onclick="showShirtsPage()">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80" alt="Tops category">
+                <p>Tops</p>
+            </div>
+        </div>
+
+        <div class="row text-center info-strip">
+            <div class="col-md info-item">
+                <div class="icon">🚚</div>
+                <h6 class="fw-bold">Free shipping</h6>
+                <p>On orders over $75</p>
+            </div>
+
+            <div class="col-md info-item">
+                <div class="icon">↩️</div>
+                <h6 class="fw-bold">Free returns</h6>
+                <p>30-day returns</p>
+            </div>
+
+            <div class="col-md info-item">
+                <div class="icon">🍃</div>
+                <h6 class="fw-bold">Sustainable materials</h6>
+                <p>Better for you & the planet</p>
+            </div>
+
+            <div class="col-md">
+                <div class="icon">🔒</div>
+                <h6 class="fw-bold">Secure payments</h6>
+                <p>Safe & trusted checkout</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shirts Listing Page -->
+    <section id="shirtsPage" class="container-fluid px-5 py-5 d-none">
+        <nav class="mb-3 small">
+            <a href="#" class="text-dark" onclick="showHome()">Home</a> /
+            <a href="#" class="text-dark">Men</a> /
+            <span class="text-muted">Shirts</span>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h1 class="fw-bold">Men’s Shirts</h1>
+                <p class="text-muted">Classic, relaxed, and outdoor-ready shirts for every day.</p>
+            </div>
+            <p class="text-muted" id="itemCount">8 items</p>
+        </div>
+
+        <div class="row">
+            <aside class="col-md-3 border-end pe-4">
+                <div class="d-flex justify-content-between">
+                    <h5 class="fw-bold">Filters</h5>
+                    <button class="btn btn-link text-dark p-0" onclick="clearFilters()">Clear all</button>
+                </div>
+
+                <hr>
+
+                <h6 class="fw-bold">Size</h6>
+                <label><input type="checkbox" class="filter" value="S"> S</label><br>
+                <label><input type="checkbox" class="filter" value="M"> M</label><br>
+                <label><input type="checkbox" class="filter" value="L"> L</label><br>
+                <label><input type="checkbox" class="filter" value="XL"> XL</label>
+
+                <hr>
+
+                <h6 class="fw-bold">Color</h6>
+                <label><input type="checkbox" class="filter" value="White"> White</label><br>
+                <label><input type="checkbox" class="filter" value="Black"> Black</label><br>
+                <label><input type="checkbox" class="filter" value="Blue"> Blue</label><br>
+                <label><input type="checkbox" class="filter" value="Green"> Green</label>
+
+                <hr>
+
+                <h6 class="fw-bold">Price</h6>
+                <label><input type="checkbox" class="price-filter" value="60"> Under $60</label><br>
+                <label><input type="checkbox" class="price-filter" value="80"> Under $80</label><br>
+                <label><input type="checkbox" class="price-filter" value="100"> Under $100</label>
+
+                <hr>
+
+                <h6 class="fw-bold">Fabric</h6>
+                <label><input type="checkbox" class="filter" value="Cotton"> Cotton</label><br>
+                <label><input type="checkbox" class="filter" value="Linen"> Linen</label><br>
+                <label><input type="checkbox" class="filter" value="Flannel"> Flannel</label>
+
+                <hr>
+
+                <h6 class="fw-bold">Fit</h6>
+                <label><input type="checkbox" class="filter" value="Regular"> Regular</label><br>
+                <label><input type="checkbox" class="filter" value="Relaxed"> Relaxed</label><br>
+                <label><input type="checkbox" class="filter" value="Slim"> Slim</label>
+            </aside>
+
+            <main class="col-md-9 ps-md-5">
+                <div class="d-flex justify-content-between mb-4">
+                    <span id="resultCount">8 products</span>
+
+                    <select class="form-select w-auto" id="sortSelect" onchange="applyFilters()">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="low">Price: Low to High</option>
+                        <option value="high">Price: High to Low</option>
+                    </select>
+                </div>
+
+                <div class="row g-4" id="productGrid"></div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Product Detail Page -->
+    <section id="productDetailPage" class="container-fluid px-5 py-5 d-none">
+        <nav class="mb-4 small">
+            <a href="#" class="text-dark" onclick="showHome()">Home</a> /
+            <a href="#" class="text-dark" onclick="showShirtsPage()">Men’s Shirts</a> /
+            <span class="text-muted" id="detailBreadcrumb">Product</span>
+        </nav>
+
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <img id="detailImage" class="detail-image" src="" alt="Product image">
+            </div>
+
+            <div class="col-lg-6">
+                <h1 class="fw-bold" id="detailName"></h1>
+                <p class="fs-5 mt-3" id="detailPrice"></p>
+                <p class="text-danger">Canada Day Sale: Extra 20% off $100+</p>
+
+                <div class="mt-4">
+                    <p class="mb-2">
+                        <strong>Colour</strong>
+                        <span id="selectedColorText">Select a colour</span>
+                    </p>
+                    <div id="detailColors"></div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold">Select Size</p>
+                        <a href="#" class="text-dark">Size Guide</a>
+                    </div>
+                    <div id="detailSizes"></div>
+                </div>
+
+                <div class="ship-box">
+                    <p class="mb-1 fw-bold">● Ship it to me</p>
+                    <p class="mb-0 text-muted">Free shipping and returns</p>
+                </div>
+
+                <div class="ship-box">
+                    <p class="mb-0 fw-bold">⌂ Pick up in store <span class="float-end">+</span></p>
+                </div>
+
+                <button class="btn btn-dark w-100 mt-3" onclick="addToCart()">
+                    ADD TO CART
+                </button>
+
+                <div class="mt-4 border-top pt-4">
+                    <h5 class="fw-bold">Details</h5>
+                    <p id="detailDescription" class="text-muted"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Side Panel -->
+    <aside class="cart-panel" id="cartPanel">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold">Shopping Cart</h4>
+            <button class="btn btn-sm btn-outline-dark" onclick="toggleCart()">×</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between fw-bold">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">$0.00 CAD</span>
+        </div>
+
+      <!--  <button class="btn btn-dark w-100 mt-4">
+            CHECKOUT
+        </button>
+		-->
+	
+	<a href="checkout.html" class="btn btn-dark w-100 mt-4">
+    CHECKOUT
+</a>
+    </aside>
+
+    <!-- Footer Intro -->
+    <section class="footer-intro" id="footerIntro">
+        <div>
+            <h1>New to WildTrail?</h1>
+            <p>Get familiar, get inspired, and get moving.</p>
+        </div>
+        <button class="btn btn-dark rounded-pill px-4">Start Here</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footerSection">
+        <div class="row">
+            <div class="col-md-2">
+                <h6>My Account</h6>
+                <p>Sign In</p>
+                <p>Register</p>
+                <p>Order Status</p>
+                <p>Returns</p>
+            </div>
+
+            <div class="col-md-2">
+                <h6>Help</h6>
+                <p>Ordering</p>
+                <p>Returns and Refunds</p>
+                <p>Shipping and Delivery</p>
+                <p>Payment</p>
+            </div>
+
+            <div class="col-md-2">
+                <h6>Legal</h6>
+                <p>Accessibility Statement</p>
+                <p>Privacy Policy</p>
+                <p>Terms of Use</p>
+            </div>
+
+            <div class="col-md-2">
+                <h6>About Us</h6>
+                <p>Our Business</p>
+                <p>Sustainability</p>
+                <p>Careers</p>
+            </div>
+
+            <div class="col-md-2">
+                <h6>Contact Us</h6>
+                <p>Live Chat</p>
+                <p>Store Locator</p>
+            </div>
+
+            <div class="col-md-2">
+                <h6>Email Sign Up</h6>
+                <p>Gift Cards</p>
+                <p>Follow us: Instagram | Pinterest</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© WildTrail Canada</p>
+            <p>Privacy Policy | Terms of Use</p>
+        </div>
+    </footer>
+
+    <script>
+        const shirts = [
+            {
+                id: 1,
+                name: "Trail Cotton Tee",
+                price: "$58.00 CAD",
+                priceValue: 58,
+                size: "M",
+                color: "White",
+                fabric: "Cotton",
+                fit: "Regular",
+               // img: "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts7.jpg",
+                colors: [
+                    { name: "White", value: "white" },
+                    { name: "Black", value: "black" },
+                    { name: "Grey", value: "#6d6d6d" },
+                    { name: "Olive Green", value: "#556b2f" }
+                ],
+                sizes: ["XS", "S", "M", "L", "XL"],
+                description: "A soft cotton everyday tee designed for relaxed comfort and light outdoor activities."
+            },
+            {
+                id: 2,
+                name: "Acid Wash Monologo Tee",
+                price: "$46.80 CAD",
+                priceValue: 47,
+                size: "L",
+                color: "Blue",
+                fabric: "Cotton",
+                fit: "Relaxed",
+              //  img: "https://images.unsplash.com/photo-1622445275463-afa2ab738c34?auto=format&fit=crop&w=600&q=80",
+			      img: "/images/shirts2.jpg",
+                colors: [
+                    { name: "Sky Blue", value: "#9bb7e8" },
+                    { name: "Purple Grey", value: "#5b5265" },
+                    { name: "Black", value: "black" },
+                    { name: "Deep Green", value: "#4a5a50" }
+                ],
+                sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+                description: "A relaxed tee with a soft washed feel, made for casual days and weekend trips."
+            },
+            {
+                id: 3,
+                name: "Everyday Button-Up Shirt",
+                price: "$65.00 CAD",
+                priceValue: 65,
+                size: "M",
+                color: "Black",
+                fabric: "Cotton",
+                fit: "Slim",
+              //  img: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts3.jpg",
+                colors: [
+                    { name: "Black", value: "black" },
+                    { name: "White", value: "white" },
+                    { name: "Sand", value: "#c8b8a6" },
+                    { name: "Navy", value: "#2d3e50" }
+                ],
+                sizes: ["S", "M", "L", "XL"],
+                description: "A clean button-up shirt with a slim fit, suitable for daily wear or smart casual styling."
+            },
+            {
+                id: 4,
+                name: "Outdoor Flannel Shirt",
+                price: "$79.00 CAD",
+                priceValue: 79,
+                size: "XL",
+                color: "Green",
+                fabric: "Flannel",
+                fit: "Regular",
+              //  img: "https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts4.jpg",
+                colors: [
+                    { name: "Forest Green", value: "#3f5d45" },
+                    { name: "Rust Brown", value: "#7a3e2f" },
+                    { name: "Black", value: "#222" },
+                    { name: "Stone", value: "#d8d0c0" }
+                ],
+                sizes: ["S", "M", "L", "XL", "2XL"],
+                description: "A warm flannel shirt designed for cooler weather, camping, and relaxed outdoor style."
+            },
+            {
+                id: 5,
+                name: "Classic Oxford Shirt",
+                price: "$68.00 CAD",
+                priceValue: 68,
+                size: "S",
+                color: "White",
+                fabric: "Cotton",
+                fit: "Regular",
+               // img: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts6.jpg",
+                colors: [
+                    { name: "White", value: "white" },
+                    { name: "Light Blue", value: "#d9e8f7" },
+                    { name: "Cream", value: "#f2e6d8" },
+                    { name: "Black", value: "#111" }
+                ],
+                sizes: ["XS", "S", "M", "L", "XL"],
+                description: "A classic oxford shirt with breathable cotton and a timeless everyday shape."
+            },
+            {
+                id: 6,
+                name: "Soft Camp Shirt",
+                price: "$55.00 CAD",
+                priceValue: 55,
+                size: "M",
+                color: "Blue",
+                fabric: "Linen",
+                fit: "Relaxed",
+              //  img: "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts11.jpg",
+                colors: [
+                    { name: "Light Blue", value: "#88a9c3" },
+                    { name: "Cream", value: "#f5f1e8" },
+                    { name: "Forest Green", value: "#3c4c3f" },
+                    { name: "Black", value: "#222" }
+                ],
+                sizes: ["S", "M", "L", "XL"],
+                description: "A light camp shirt made for warm weather, travel, and casual summer days."
+            },
+            {
+                id: 7,
+                name: "Urban Slim Shirt",
+                price: "$60.00 CAD",
+                priceValue: 60,
+                size: "L",
+                color: "Black",
+                fabric: "Cotton",
+                fit: "Slim",
+             //   img: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=600&q=80",
+			  img: "/images/shirts8.jpg",
+                colors: [
+                    { name: "Black", value: "black" },
+                    { name: "Charcoal", value: "#777" },
+                    { name: "White", value: "white" },
+                    { name: "Navy", value: "#1e3a5f" }
+                ],
+                sizes: ["S", "M", "L", "XL"],
+                description: "A slim shirt with a simple look for city life, workdays, and evening plans."
+            },
+            {
+                id: 8,
+                name: "Mountain Check Shirt",
+                price: "$82.00 CAD",
+                priceValue: 82,
+                size: "XL",
+                color: "Green",
+                fabric: "Flannel",
+                fit: "Relaxed",
+            //    img: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80",
+			    img: "/images/shirts9.jpg",
+                colors: [
+                    { name: "Olive Green", value: "#566b4f" },
+                    { name: "Clay Brown", value: "#8a4b3a" },
+                    { name: "Black", value: "#222" },
+                    { name: "Khaki", value: "#b8a88a" }
+                ],
+                sizes: ["M", "L", "XL", "2XL"],
+                description: "A relaxed check shirt made for layering, hiking, and cool evenings outdoors."
+            }
+        ];
+
+        let currentProduct = null;
+        let selectedSize = "";
+        let selectedColor = "";
+        let selectedColorName = "";
+        let cart = JSON.parse(localStorage.getItem("wildtrailCart")) || [];
+
+        function closePromo() {
+            document.getElementById("promoBar").style.display = "none";
+        }
+
+        function hideAllMainSections() {
+            document.getElementById("heroSection").classList.add("d-none");
+            document.getElementById("categorySection").classList.add("d-none");
+            document.getElementById("shirtsPage").classList.add("d-none");
+            document.getElementById("productDetailPage").classList.add("d-none");
+        }
+
+        function showHome() {
+            hideAllMainSections();
+            document.getElementById("heroSection").classList.remove("d-none");
+            document.getElementById("categorySection").classList.remove("d-none");
+            window.scrollTo(0, 0);
+        }
+
+        function showShirtsPage() {
+            hideAllMainSections();
+            document.getElementById("shirtsPage").classList.remove("d-none");
+            renderProducts(shirts);
+            window.scrollTo(0, 0);
+        }
+
+        function showProductDetail(productId) {
+            currentProduct = shirts.find(product => product.id === productId);
+            selectedSize = "";
+            selectedColor = currentProduct.colors[0].value;
+            selectedColorName = currentProduct.colors[0].name;
+
+            hideAllMainSections();
+            document.getElementById("productDetailPage").classList.remove("d-none");
+
+            document.getElementById("detailBreadcrumb").textContent = currentProduct.name;
+            document.getElementById("detailImage").src = currentProduct.img;
+            document.getElementById("detailName").textContent = currentProduct.name;
+            document.getElementById("detailPrice").textContent = currentProduct.price;
+            document.getElementById("detailDescription").textContent = currentProduct.description;
+            document.getElementById("selectedColorText").textContent = selectedColorName;
+
+            renderDetailColors();
+            renderDetailSizes();
+            window.scrollTo(0, 0);
+        }
+
+        function renderProducts(products) {
+            const grid = document.getElementById("productGrid");
+            const count = document.getElementById("resultCount");
+            const itemCount = document.getElementById("itemCount");
+
+            count.textContent = products.length + " products";
+            itemCount.textContent = products.length + " items";
+
+            grid.innerHTML = products.map(product => `
+                <div class="col-6 col-lg-3 product-card" onclick="showProductDetail(${product.id})">
+                    <img src="${product.img}" alt="${product.name}">
+                    <h6>${product.name}</h6>
+                    <p>${product.price}</p>
+                    <div>
+                        ${product.colors.map(color => `
+                            <span
+                                class="color-dot"
+                                title="${color.name}"
+                                style="background:${color.value}"
+                            ></span>
+                        `).join("")}
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderDetailColors() {
+            const colorContainer = document.getElementById("detailColors");
+
+            colorContainer.innerHTML = currentProduct.colors.map(color => `
+                <span
+                    class="color-dot ${color.value === selectedColor ? "active" : ""}"
+                    title="${color.name}"
+                    style="background:${color.value}"
+                    onclick="selectColor('${color.value}', '${color.name}')"
+                ></span>
+            `).join("");
+        }
+
+        function selectColor(value, name) {
+            selectedColor = value;
+            selectedColorName = name;
+            document.getElementById("selectedColorText").textContent = name;
+            renderDetailColors();
+        }
+
+        function renderDetailSizes() {
+            const sizeContainer = document.getElementById("detailSizes");
+
+            sizeContainer.innerHTML = currentProduct.sizes.map(size => `
+                <button
+                    class="size-btn ${size === selectedSize ? "active" : ""}"
+                    onclick="selectSize('${size}')"
+                >
+                    ${size}
+                </button>
+            `).join("");
+        }
+
+        function selectSize(size) {
+            selectedSize = size;
+            renderDetailSizes();
+        }
+
+        function addToCart() {
+            if (!selectedSize) {
+                alert("Please select a size first.");
+                return;
+            }
+
+            const cartItem = {
+                id: Date.now(),
+                name: currentProduct.name,
+                price: currentProduct.price,
+                priceValue: currentProduct.priceValue,
+                img: currentProduct.img,
+                size: selectedSize,
+                color: selectedColorName,
+                quantity: 1
+            };
+
+            cart.push(cartItem);
+
+            localStorage.setItem("wildtrailCart", JSON.stringify(cart));
+
+            updateCartUI();
+            openCart();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById("cartCount");
+            const cartItems = document.getElementById("cartItems");
+            const cartSubtotal = document.getElementById("cartSubtotal");
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = "<p class='text-muted'>Your cart is empty.</p>";
+                cartSubtotal.textContent = "$0.00 CAD";
+                return;
+            }
+
+            cartItems.innerHTML = cart.map(item => `
+                <div class="d-flex gap-3 mb-4 border-bottom pb-3">
+                    <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+                    <div class="flex-grow-1">
+                        <h6 class="fw-bold mb-1">${item.name}</h6>
+                        <p class="mb-1">${item.price}</p>
+                        <p class="mb-1 text-muted">Size: ${item.size}</p>
+                        <p class="mb-2 text-muted">Colour: ${item.color}</p>
+                        <button class="btn btn-sm btn-link text-dark p-0" onclick="removeCartItem(${item.id})">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+
+            const subtotal = cart.reduce((total, item) => total + item.priceValue, 0);
+            cartSubtotal.textContent = "$" + subtotal.toFixed(2) + " CAD";
+        }
+
+        function removeCartItem(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            localStorage.setItem("wildtrailCart", JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function openCart() {
+            document.getElementById("cartPanel").classList.add("open");
+        }
+
+        function toggleCart() {
+            document.getElementById("cartPanel").classList.toggle("open");
+        }
+
+        function applyFilters() {
+            const selected = Array.from(document.querySelectorAll(".filter:checked"))
+                .map(item => item.value);
+
+            const selectedPrices = Array.from(document.querySelectorAll(".price-filter:checked"))
+                .map(item => Number(item.value));
+
+            let filtered = shirts.filter(product => {
+                const matchesNormal =
+                    selected.length === 0 ||
+                    selected.includes(product.size) ||
+                    selected.includes(product.color) ||
+                    selected.includes(product.fabric) ||
+                    selected.includes(product.fit);
+
+                const matchesPrice =
+                    selectedPrices.length === 0 ||
+                    selectedPrices.some(maxPrice => product.priceValue <= maxPrice);
+
+                return matchesNormal && matchesPrice;
+            });
+
+            const sortValue = document.getElementById("sortSelect").value;
+
+            if (sortValue === "low") {
+                filtered.sort((a, b) => a.priceValue - b.priceValue);
+            }
+
+            if (sortValue === "high") {
+                filtered.sort((a, b) => b.priceValue - a.priceValue);
+            }
+
+            renderProducts(filtered);
+        }
+
+        function clearFilters() {
+            document.querySelectorAll(".filter, .price-filter").forEach(filter => {
+                filter.checked = false;
+            });
+
+            document.getElementById("sortSelect").value = "featured";
+            renderProducts(shirts);
+        }
+
+        document.querySelectorAll(".filter, .price-filter").forEach(filter => {
+            filter.addEventListener("change", applyFilters);
+        });
+
+        updateCartUI();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildTrail | Checkout</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        .checkout-header {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .checkout-title {
+            font-size: 34px;
+            font-weight: 800;
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .stepper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0 35px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            width: 110px;
+        }
+
+        .step::after {
+            content: "";
+            position: absolute;
+            top: 13px;
+            left: 62px;
+            width: 90px;
+            height: 3px;
+            background: #aaa;
+            z-index: 0;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #8c969f;
+            background: white;
+            color: #8c969f;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active .step-circle,
+        .step.complete .step-circle {
+            background: #2866b1;
+            border-color: #2866b1;
+            color: white;
+        }
+
+        .step.active .step-label {
+            font-weight: 800;
+        }
+
+        .step-label {
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .checkout-card {
+            background: white;
+            padding: 26px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+        }
+
+        .checkout-card h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #111;
+            border-radius: 5px;
+            height: 52px;
+        }
+
+        .continue-btn,
+        .place-order-btn {
+            background: #212529;
+            color: white;
+            border: none;
+            height: 54px;
+            font-weight: 800;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover,
+        .place-order-btn:hover {
+            background: #000;
+            color: white;
+        }
+
+        .edit-link {
+            color: #111;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .summary-box {
+            background: #f7f7f7;
+            padding: 10px 0;
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 25px;
+        }
+
+        .summary-product-img {
+            width: 76px;
+            height: 94px;
+            object-fit: contain;
+            object-position: center top;
+            background: #eee;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .payment-option.active {
+            border: 2px solid #111;
+        }
+
+        .confirmation-box {
+            text-align: center;
+            background: white;
+            padding: 50px 30px;
+            border: 1px solid #eee;
+        }
+
+       .checkmark {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid red;
+            color: red;
+		    font-size: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+		.survey-success {
+			background: #fdeaea;
+			border: 1px solid #dc3545;
+			color: #dc3545;
+			padding: 12px;
+			margin-top: 15px;
+			border-radius: 6px;
+			text-align: center;
+			font-weight: 600;
+		}
+
+        .error-message {
+            color: #d10f2f;
+            font-size: 14px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-header {
+                padding: 0 18px;
+            }
+
+            .step {
+                width: 82px;
+            }
+
+            .step::after {
+                width: 62px;
+                left: 54px;
+            }
+
+            .summary-card {
+                position: static;
+                margin-top: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="checkout-header">
+        <a href="index.html" class="brand">🌲 WildTrail</a>
+        <div>
+            <span>👤 Sign in</span>
+            <span class="ms-3">🛍️</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="checkout-title">Checkout</h1>
+
+        <div class="stepper">
+            <div class="step active" id="stepContact">
+                <div class="step-circle">1</div>
+                <div class="step-label">Contact</div>
+            </div>
+
+            <div class="step" id="stepShipping">
+                <div class="step-circle">2</div>
+                <div class="step-label">Shipping</div>
+            </div>
+
+            <div class="step" id="stepPayment">
+                <div class="step-circle">3</div>
+                <div class="step-label">Payment</div>
+            </div>
+
+            <div class="step" id="stepReview">
+                <div class="step-circle">4</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <section class="checkout-card" id="contactSection">
+                    <h2>Contact</h2>
+
+                    <label class="form-label">Email address</label>
+                    <input
+                        type="email"
+                        class="form-control mb-3"
+                        id="email"
+                        placeholder="Enter your email address"
+                    >
+
+                    <label>
+                        <input type="checkbox" checked>
+                        Email me with news and offers.
+                    </label>
+
+                    <button class="continue-btn" onclick="goToShipping()">
+                        CONTINUE TO SHIPPING
+                    </button>
+
+                    <div class="error-message hidden" id="contactError">
+                        Please enter your email address.
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="shippingSection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Contact</h2>
+                        <span id="contactSummary"></span>
+                        <span class="edit-link" onclick="goToContact()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="shippingFormSection">
+                    <h2>Shipping</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">First name</label>
+                            <input class="form-control" id="firstName" placeholder="First name">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Last name</label>
+                            <input class="form-control" id="lastName" placeholder="Last name">
+                        </div>
+                    </div>
+
+                    <label class="form-label">Phone number</label>
+                    <input class="form-control mb-2" id="phone" placeholder="Phone number">
+                    <p class="text-muted small">This will only be used for delivery related issues.</p>
+
+                    <label class="form-label">Address</label>
+                    <input class="form-control mb-3" id="address" placeholder="Street address">
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">City</label>
+                            <input class="form-control" id="city" placeholder="City">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Province</label>
+                            <select class="form-select" id="province">
+                                <option value="" selected disabled>Select province</option>
+                                <option>Ontario</option>
+                                <option>Quebec</option>
+                                <option>British Columbia</option>
+                                <option>Alberta</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Postal code</label>
+                            <input class="form-control" id="postal" placeholder="Postal code">
+                        </div>
+                    </div>
+
+                    <div class="border p-3 mt-2">
+                        <label class="fw-bold">
+                            <input type="radio" checked>
+                            STANDARD SHIPPING (FREE)
+                        </label>
+                        <p class="mb-0 mt-2">Arrives by Thu, Jul 2</p>
+                    </div>
+
+                    <button class="continue-btn" onclick="goToPayment()">
+                        CONTINUE TO PAYMENT
+                    </button>
+
+                    <div class="error-message hidden" id="shippingError">
+                        Please complete all shipping information.
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="paymentSection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Contact</h2>
+                        <span id="contactSummary2"></span>
+                        <span class="edit-link" onclick="goToContact()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="shippingSummarySection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Shipping</h2>
+                        <div id="shippingSummary"></div>
+                        <span class="edit-link" onclick="goToShipping()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="paymentFormSection">
+                    <h2>Payment</h2>
+
+                    <div class="payment-option mb-2">
+                        <strong>🎁 Use my Gift Card</strong>
+                        <span>+</span>
+                    </div>
+
+                    <div class="payment-option mb-2">
+                        <strong>PayPal</strong>
+                        <span>+</span>
+                    </div>
+
+                    <div class="payment-option mb-2">
+                        <strong>Afterpay</strong>
+                        <span>+</span>
+                    </div>
+
+                    <div class="payment-option active mb-3">
+                        <strong>Credit card</strong>
+                        <span>−</span>
+                    </div>
+
+                    <label class="form-label">Card number</label>
+                    <input class="form-control mb-3" id="cardNumber" placeholder="Card number">
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Expiry date</label>
+                            <input class="form-control" id="expiry" placeholder="MM / YY">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Security code</label>
+                            <input class="form-control" id="security" placeholder="Security code">
+                        </div>
+                    </div>
+
+                    <label class="form-label">Name on card</label>
+                    <input class="form-control" id="cardName" placeholder="Name on card">
+
+                    <button class="continue-btn" onclick="goToReview()">
+                        REVIEW ORDER
+                    </button>
+
+                    <div class="error-message hidden" id="paymentError">
+                        Please complete all payment information.
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="reviewContactSection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Contact</h2>
+                        <span id="reviewEmail"></span>
+                        <span class="edit-link" onclick="goToContact()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="reviewShippingSection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Shipping</h2>
+                        <div id="reviewShipping"></div>
+                        <span class="edit-link" onclick="goToShipping()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="reviewPaymentSection">
+                    <div class="d-flex justify-content-between">
+                        <h2>Payment</h2>
+                        <div>
+                            <strong>VISA</strong>
+                            <span id="reviewCard"> Visa ending in 1652</span>
+                        </div>
+                        <span class="edit-link" onclick="goToPayment()">Edit</span>
+                    </div>
+                </section>
+
+                <section class="checkout-card hidden" id="trackingSection">
+                    <h2>Track your order in real time</h2>
+
+                    <label>
+                        <input type="checkbox">
+                        Get SMS updates for this order.
+                    </label>
+
+                    <p class="text-muted small mt-2">
+                        Receive up to 6 messages per delivery.
+                    </p>
+                </section>
+
+                <section class="hidden" id="placeOrderSection">
+                    <p class="small">
+                        By placing an order, you agree to WildTrail's
+                        <u>Terms of Use</u> and <u>Privacy Policy</u>.
+                    </p>
+
+                    <button class="place-order-btn" onclick="placeOrder()">
+                        PLACE ORDER
+                    </button>
+                </section>
+
+              <!--  <section class="confirmation-box hidden" id="confirmationSection">
+                    <div class="checkmark">✓</div>
+                    <h2 class="fw-bold">Thank you for your order!</h2>
+                    <p>Your order has been placed successfully.</p>
+                    <p class="text-muted">Order number: WT-2026-0712</p>
+                    <a href="index.html" class="btn btn-dark mt-3">
+                        CONTINUE SHOPPING
+                    </a>
+                </section> -->
+				
+			<section class="confirmation-box hidden" id="confirmationSection">
+
+   <div class="checkmark">&#10003;</div>
+
+    <h2 class="fw-bold">Thank you for your order!</h2>
+
+    <p>Your order has been placed successfully.</p>
+
+    <p class="text-muted">
+        Order number: WT-2026-0712
+    </p>
+
+    <hr class="my-4">
+
+    <h4>Customer Experience Survey</h4>
+
+    <p>Please take a minute to tell us about your shopping experience.</p>
+
+    <div class="mb-3 text-start">
+
+        <label class="form-label fw-bold">
+            Overall satisfaction
+        </label>
+
+        <select class="form-select" id="surveyRating">
+            <option value="">Select a rating</option>
+            <option>5 - Excellent</option>
+			<option>4 - Good</option>
+			<option>3 - Average</option>
+			<option>2 - Poor</option>
+			<option>1 - Very Poor</option>
+        </select>
+
+    </div>
+
+    <div class="mb-3 text-start">
+
+        <label class="form-label fw-bold">
+            Was it easy to find the products?
+        </label><br>
+
+        <input type="radio" name="easy" value="Yes"> Yes
+        &nbsp;&nbsp;
+
+        <input type="radio" name="easy" value="No"> No
+
+    </div>
+
+    <div class="mb-3 text-start">
+
+        <label class="form-label fw-bold">
+            Additional comments
+        </label>
+
+        <textarea
+            id="surveyComment"
+            class="form-control"
+            rows="4"
+            placeholder="Tell us how we can improve..."
+        ></textarea>
+
+    </div>
+
+    <!--<button
+        class="btn btn-success w-100"
+        onclick="submitSurvey()"
+    >
+        Submit Survey
+    </button> -->
+	
+	<button
+    class="btn btn-dark w-100"
+    onclick="submitSurvey()"
+    id="submitSurveyBtn"
+>
+    Submit Survey
+</button>
+<!--
+<div class="alert alert-success mt-3 hidden" id="surveySuccess">
+    Thank you for your feedback! We appreciate your comments.
+</div>
+-->
+
+<div class="survey-success hidden" id="surveySuccess">
+    Thank you for your feedback! We appreciate your comments.
+</div>
+    <a href="index.html" class="btn btn-dark mt-3 w-100">
+        Continue Shopping
+    </a>
+
+</section>
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="summary-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="fw-bold">Order summary</h4>
+                        <span id="summaryCount">1 item</span>
+                    </div>
+
+                    <hr>
+
+                    <div id="summaryItems"></div>
+
+                    <hr>
+
+                    <div class="order-row">
+                        <strong>Subtotal</strong>
+                        <span id="subtotalText">$0.00</span>
+                    </div>
+
+                    <div class="order-row">
+                        <strong>Shipping</strong>
+                        <span>FREE</span>
+                    </div>
+
+                    <div class="order-row">
+                        <span>GST/HST</span>
+                        <span id="taxText">$0.00</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="order-row fs-5">
+                        <strong>Order total</strong>
+                        <strong id="totalText">CAD $0.00</strong>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let checkoutItems = JSON.parse(localStorage.getItem("wildtrailCart")) || [];
+
+        let currentStep = 1;
+
+        function updateStepper(step) {
+            currentStep = step;
+
+            const steps = [
+                "stepContact",
+                "stepShipping",
+                "stepPayment",
+                "stepReview"
+            ];
+
+            steps.forEach((stepId, index) => {
+                const element = document.getElementById(stepId);
+                element.classList.remove("active", "complete");
+
+                if (index + 1 < step) {
+                    element.classList.add("complete");
+                }
+
+                if (index + 1 === step) {
+                    element.classList.add("active");
+                }
+            });
+        }
+
+        function hideAllCheckoutSections() {
+            const sections = [
+                "contactSection",
+                "shippingSection",
+                "shippingFormSection",
+                "paymentSection",
+                "shippingSummarySection",
+                "paymentFormSection",
+                "reviewContactSection",
+                "reviewShippingSection",
+                "reviewPaymentSection",
+                "trackingSection",
+                "placeOrderSection",
+                "confirmationSection"
+            ];
+
+            sections.forEach(sectionId => {
+                document.getElementById(sectionId).classList.add("hidden");
+            });
+        }
+
+        function goToContact() {
+            hideAllCheckoutSections();
+            updateStepper(1);
+            document.getElementById("contactSection").classList.remove("hidden");
+            window.scrollTo(0, 0);
+        }
+
+        function goToShipping() {
+            const email = document.getElementById("email").value.trim();
+            const contactError = document.getElementById("contactError");
+
+        /* if (email === "") {
+                contactError.classList.remove("hidden");
+                document.getElementById("email").focus();
+                return;
+            }
+			*/
+			
+			if (email === "") {
+  //  alert("Please enter your contact information.");
+    contactError.classList.remove("hidden");
+    document.getElementById("email").focus();
+    return;
+}
+
+            contactError.classList.add("hidden");
+
+            hideAllCheckoutSections();
+            updateStepper(2);
+
+            document.getElementById("contactSummary").textContent = email;
+
+            document.getElementById("shippingSection").classList.remove("hidden");
+            document.getElementById("shippingFormSection").classList.remove("hidden");
+            window.scrollTo(0, 0);
+        }
+
+        function goToPayment() {
+            const email = document.getElementById("email").value.trim();
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const province = document.getElementById("province").value;
+            const postal = document.getElementById("postal").value.trim();
+            const shippingError = document.getElementById("shippingError");
+
+            if (
+                firstName === "" ||
+                lastName === "" ||
+                phone === "" ||
+                address === "" ||
+                city === "" ||
+                province === "" ||
+                postal === ""
+            ) {
+                shippingError.classList.remove("hidden");
+                return;
+            }
+
+            shippingError.classList.add("hidden");
+
+            hideAllCheckoutSections();
+            updateStepper(3);
+
+            document.getElementById("contactSummary2").textContent = email;
+            document.getElementById("shippingSummary").innerHTML = `
+                ${firstName} ${lastName}<br>
+                ${address} ${city}, ${province} ${postal}, CAN<br>
+                ${phone}<br><br>
+                <strong>STANDARD SHIPPING (FREE)</strong><br>
+                <strong>Arrives by Thu, Jul 2</strong>
+            `;
+
+            document.getElementById("paymentSection").classList.remove("hidden");
+            document.getElementById("shippingSummarySection").classList.remove("hidden");
+            document.getElementById("paymentFormSection").classList.remove("hidden");
+            window.scrollTo(0, 0);
+        }
+
+        function goToReview() {
+            const email = document.getElementById("email").value.trim();
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const province = document.getElementById("province").value;
+            const postal = document.getElementById("postal").value.trim();
+            const cardNumber = document.getElementById("cardNumber").value.trim();
+            const expiry = document.getElementById("expiry").value.trim();
+            const security = document.getElementById("security").value.trim();
+            const cardName = document.getElementById("cardName").value.trim();
+            const paymentError = document.getElementById("paymentError");
+
+            if (
+                cardNumber === "" ||
+                expiry === "" ||
+                security === "" ||
+                cardName === ""
+            ) {
+                paymentError.classList.remove("hidden");
+                return;
+            }
+
+            paymentError.classList.add("hidden");
+
+            hideAllCheckoutSections();
+            updateStepper(4);
+
+            const lastFour = cardNumber.slice(-4);
+
+            document.getElementById("reviewEmail").textContent = email;
+            document.getElementById("reviewShipping").innerHTML = `
+                ${firstName} ${lastName}<br>
+                ${address} ${city}, ${province} ${postal}, CAN<br>
+                ${phone}<br><br>
+                <strong>STANDARD SHIPPING (FREE)</strong><br>
+                <strong>Arrives by Thu, Jul 2</strong>
+            `;
+            document.getElementById("reviewCard").textContent = " Visa ending in " + lastFour;
+
+            document.getElementById("reviewContactSection").classList.remove("hidden");
+            document.getElementById("reviewShippingSection").classList.remove("hidden");
+            document.getElementById("reviewPaymentSection").classList.remove("hidden");
+            document.getElementById("trackingSection").classList.remove("hidden");
+            document.getElementById("placeOrderSection").classList.remove("hidden");
+            window.scrollTo(0, 0);
+        }
+
+        function placeOrder() {
+            hideAllCheckoutSections();
+            document.getElementById("confirmationSection").classList.remove("hidden");
+            localStorage.removeItem("wildtrailCart");
+            updateStepper(4);
+            window.scrollTo(0, 0);
+        }
+/*********************************************************************************/
+		function submitSurvey() {
+    const rating = document.getElementById("surveyRating").value;
+    const easy = document.querySelector('input[name="easy"]:checked');
+    const comment = document.getElementById("surveyComment").value.trim();
+    const surveySuccess = document.getElementById("surveySuccess");
+
+    if (rating === "") {
+        alert("Please rate your shopping experience.");
+        return;
+    }
+
+    if (!easy) {
+        alert("Please answer whether it was easy to find products.");
+        return;
+    }
+
+    surveySuccess.classList.remove("hidden");
+
+    document.getElementById("surveyRating").disabled = true;
+    document.querySelectorAll('input[name="easy"]').forEach(radio => {
+        radio.disabled = true;
+    });
+    document.getElementById("surveyComment").disabled = true;
+
+  //  document.querySelector("button[onclick='submitSurvey()']").disabled = true;
+  //  document.querySelector("button[onclick='submitSurvey()']").textContent = "Survey Submitted";
+  
+  const button = document.getElementById("submitSurveyBtn");
+
+button.disabled = true;
+button.textContent = "Survey Submitted";
+button.classList.remove("btn-dark");
+button.classList.add("btn-secondary");
+}
+		
+	/*******************************************************/	
+		
+        function renderSummary() {
+            const summaryItems = document.getElementById("summaryItems");
+            const summaryCount = document.getElementById("summaryCount");
+            const subtotalText = document.getElementById("subtotalText");
+            const taxText = document.getElementById("taxText");
+            const totalText = document.getElementById("totalText");
+
+            let subtotal = 0;
+            let totalQuantity = 0;
+
+            if (checkoutItems.length === 0) {
+                summaryItems.innerHTML = `
+                    <p class="text-muted">Your cart is empty.</p>
+                    <a href="index.html" class="btn btn-dark w-100 mt-3">RETURN TO SHOPPING</a>
+                `;
+                summaryCount.textContent = "0 items";
+                subtotalText.textContent = "$0.00";
+                taxText.textContent = "$0.00";
+                totalText.textContent = "CAD $0.00";
+                return;
+            }
+
+            summaryItems.innerHTML = checkoutItems.map(item => {
+                const quantity = item.quantity || 1;
+                const lineTotal = item.priceValue * quantity;
+                subtotal += lineTotal;
+                totalQuantity += quantity;
+
+                return `
+                    <div class="d-flex gap-3 mb-3">
+                        <img class="summary-product-img" src="${item.img}" alt="${item.name}">
+                        <div class="flex-grow-1">
+                            <h6 class="fw-bold mb-1">${item.name}</h6>
+                            <p class="mb-1 text-muted">Color ${item.colorName || item.color}</p>
+                            <p class="mb-1 text-muted">Size ${item.size}</p>
+                            <div class="d-flex justify-content-between">
+                                <span>Quantity ${quantity}</span>
+                                <strong>$${lineTotal.toFixed(2)}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted small">Free returns online and in-store</p>
+                    <hr>
+                `;
+            }).join("");
+
+            const tax = subtotal * 0.13;
+            const total = subtotal + tax;
+
+            summaryCount.textContent = totalQuantity + (totalQuantity === 1 ? " item" : " items");
+            subtotalText.textContent = "$" + subtotal.toFixed(2);
+            taxText.textContent = "$" + tax.toFixed(2);
+            totalText.textContent = "CAD $" + total.toFixed(2);
+        }
+
+        renderSummary();
+    </script>
+</body>
+</html>
