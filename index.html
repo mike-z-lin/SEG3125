@@ -28,14 +28,81 @@ body {
 }
 
 /* CASE STUDIES */
-.case-img {
-    height: 160px;
-    object-fit: cover;
+.project-card {
+    height: 100%;
+    border: 1px solid #e1e5ea;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    transition: 0.3s;
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.14);
+}
+
+.project-image-link {
+    display: block;
+    overflow: hidden;
+    background: #eef1f5;
+}
+
+.case-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .case-img {
+    transform: scale(1.025);
+}
+
+.project-card .card-body {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-card h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.project-description {
+    color: #5f6772;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+
+.project-card .btn {
+    margin-top: auto;
+}
+
+.project-image-link:focus-visible,
+.project-card .btn:focus-visible {
+    outline: 3px solid rgba(13, 110, 253, 0.35);
+    outline-offset: 3px;
+}
+/*
+.service-img { object-position: center 38%; }
+.memory-img  { object-position: center 30%; }
+.shop-img    { object-position: center 28%; }
+.dashboard-img { object-position: center top; }
+*/
+
+/* ===== Project thumbnail positioning ===== */
+.service-img,
+.memory-img,
+.shop-img,
+.dashboard-img {
+    object-position: center top;
 }
 
 /* =========================
@@ -264,7 +331,7 @@ body {
 
                     <p>I am currently studying UI Design and learning:</p>
 					<ul>
-					    <li>Visiual Communication</li>
+					    <li>Visual Communication</li>
                         <li>User-centered design</li>
                         <li>Human Cognition</li>
                     </ul>
@@ -288,51 +355,58 @@ body {
 
     <!-- CASE STUDIES -->
     <h3 class="section-bar text-center mt-5">Case Studies</h3>
-    <div class="row g-3 mt-2">
+    <div class="row g-4 mt-2">
 
         <div class="col-12 col-md-6 col-lg-3">
-            <div class="card">
-			<a href=" https://300350502-a2.netlify.app/" target="_blank">
-                <img class="case-img card-img-top" src="./servicewebsite.jpg" alt="Service Website">
-			</a>
+            <article class="card project-card">
+                <a class="project-image-link" href="https://300350502-a2.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open GreatPets Vet Clinic service website">
+                    <img class="case-img service-img card-img-top" src="./servicewebsite2.jpg" alt="Homepage of the GreatPets Vet Clinic service website">
+                </a>
                 <div class="card-body">
-                    <h6>Service Website</h6>
-					<a href=" https://300350502-a2.netlify.app/" target="_blank">
-                    <button class="btn btn-primary btn-sm">View Project</button>
-					</a>
+                    <h6>GreatPets Vet Clinic</h6>
+                    <p class="project-description">A responsive service website with clear navigation, service cards and appointment-focused calls to action.</p>
+                    <a class="btn btn-primary btn-sm" href="https://300350502-a2.netlify.app/" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
-            </div>
-        </div>
-		
-		
-        <div class="col-12 col-md-6 col-lg-3">
-            <div class="card">
-                <img class="case-img card-img-top" src="./memorygame.jpg">
-                <div class="card-body">
-                    <h6>un jeu de mémoire</h6>
-                    <button class="btn btn-primary btn-sm">Coming Soon</button>
-                </div>
-            </div>
+            </article>
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-            <div class="card">
-                <img class="case-img card-img-top" src="./ecommerce.jpg">
+            <article class="card project-card">
+                <a class="project-image-link" href="https://300350502-a3.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Memory Challenge game">
+                    <img class="case-img memory-img card-img-top" src="./memorygame2.jpg" alt="Memory Challenge game with cards, timer, move count and level controls">
+                </a>
                 <div class="card-body">
-                    <h6>E-commerce Site</h6>
-                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                    <h6>Memory Challenge</h6>
+                    <p class="project-description">An interactive memory game with difficulty levels, categories, a timer, move tracking and responsive controls.</p>
+                    <a class="btn btn-primary btn-sm" href="https://300350502-a3.netlify.app/" target="_blank" rel="noopener noreferrer">Play Game</a>
                 </div>
-            </div>
+            </article>
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-            <div class="card">
-                <img class="case-img card-img-top" src="./analytic.jpg">
+            <article class="card project-card">
+                <a class="project-image-link" href="https://300350502-a4.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open WildTrail e-commerce website">
+                    <img class="case-img shop-img card-img-top" src="./ecommerce2.jpg" alt="WildTrail clothing e-commerce homepage with Canada Day sale and shopping categories">
+                </a>
                 <div class="card-body">
-                    <h6>Analytics Dashboard</h6>
-                    <button class="btn btn-primary btn-sm">Coming Soon</button>
+                    <h6>WildTrail E-commerce</h6>
+                    <p class="project-description">A clothing shopping experience with product browsing, filtering, cart features and a multi-step checkout.</p>
+                    <a class="btn btn-primary btn-sm" href="https://300350502-a4.netlify.app/" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
-            </div>
+            </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <article class="card project-card">
+                <a class="project-image-link" href="https://300350502-a5.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Canadian University Enrolment Dashboard">
+                    <img class="case-img dashboard-img card-img-top" src="./analytic2.jpg" alt="Canadian University Enrolment Dashboard with filters, KPI cards and four charts">
+                </a>
+                <div class="card-body">
+                    <h6>University Enrolment Dashboard</h6>
+                    <p class="project-description">A bilingual interactive dashboard for comparing Canadian universities using filters, KPIs and multiple charts.</p>
+                    <a class="btn btn-primary btn-sm" href="https://300350502-a5.netlify.app/" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+            </article>
         </div>
 
     </div>
